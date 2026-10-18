@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
+import ServiceCard from '../../components/common/ServiceCard';
 import { SERVICES } from '../../constants/mockData';
-import { Scissors, Clock, Check, Calendar, Sparkles } from 'lucide-react';
 
 export default function ServicesPage() {
   return (
@@ -30,65 +30,7 @@ export default function ServicesPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {SERVICES.map((service) => (
-                <div
-                  key={service.id}
-                  className={`p-7 rounded-2xl border flex flex-col justify-between transition-all duration-300 relative group ${
-                    service.popular
-                      ? 'bg-gradient-to-b from-[#181a24] to-[#12131b] border-[#c59b63] shadow-xl shadow-amber-950/20'
-                      : 'bg-[#12131b] border-[#1d1f2b] hover:border-[#2f3244]'
-                  }`}
-                >
-                  {service.popular && (
-                    <span className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-[#c59b63] text-black font-bold text-[10px] uppercase tracking-wider shadow-md">
-                      Más Popular
-                    </span>
-                  )}
-
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start gap-3">
-                      <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#d4a366]">
-                          {service.category}
-                        </span>
-                        <h3 className="font-serif-luxury text-xl font-bold text-zinc-100 mt-0.5">
-                          {service.name}
-                        </h3>
-                      </div>
-                      <span className="font-serif-luxury font-bold text-lg text-[#d4a366] bg-[#c59b63]/10 px-3 py-1 rounded-lg border border-[#c59b63]/20 shrink-0">
-                        {service.priceFormatted}
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-zinc-400 leading-relaxed">{service.description}</p>
-
-                    <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
-                      <Clock className="w-4 h-4 text-[#d4a366]" />
-                      <span>Duración: {service.duration}</span>
-                    </div>
-
-                    {/* Incluye */}
-                    <div className="pt-3 border-t border-[#1d1f2b] space-y-2">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-                        Qué incluye:
-                      </p>
-                      {service.includes.map((item, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
-                          <Check className="w-3.5 h-3.5 text-[#d4a366] shrink-0" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-6">
-                    <Link
-                      to={`/agendar?servicio=${service.id}`}
-                      className="block w-full text-center py-3 rounded-xl bg-gradient-to-r from-[#d4a366]/20 to-[#c59b63]/10 hover:from-[#c59b63] hover:to-[#d4a366] text-[#e0b77e] hover:text-black font-semibold text-xs uppercase tracking-wider border border-[#c59b63]/40 transition-all duration-200 cursor-pointer"
-                    >
-                      Agendar este Servicio
-                    </Link>
-                  </div>
-                </div>
+                <ServiceCard key={service.id} service={service} showIncludes={true} />
               ))}
             </div>
           </div>
