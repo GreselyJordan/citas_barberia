@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
@@ -19,6 +20,7 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
+  const [activeTab, setActiveTab] = useState('todos'); // 'todos' | 'servicios' | 'barberos'
   const featuredServices = SERVICES.slice(0, 3);
   const featuredBarbers = BARBERS.slice(0, 4);
 
@@ -167,100 +169,119 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ======================= SERVICIOS DESTACADOS ======================= */}
-        <section className="py-20 bg-[#0b0c10] border-b border-[#181923]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* ======================= SERVICIOS Y BARBEROS (SECCIÓN UNIFICADA) ======================= */}
+        <section id="servicios-barberos" className="py-20 bg-[#0b0c10] border-b border-[#181923]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            {/* Cabecera Principal de la Sección */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
                 <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d4a366]">
-                  Experiencias Destacadas
+                  Experiencias & Maestros
                 </span>
-                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-zinc-100 mt-1">
-                  Nuestros Servicios Principales
+                <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold text-zinc-100 mt-1">
+                  Servicios & Equipo de Barberos
                 </h2>
-              </div>
-              <Link
-                to="/servicios"
-                className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#d4a366] hover:text-[#e0b77e] transition-colors"
-              >
-                <span>Ver catálogo completo</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredServices.map((srv) => (
-                <ServiceCard key={srv.id} service={srv} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ======================= TEASER SOBRE NOSOTROS ======================= */}
-        <section className="py-20 bg-[#0e0f15] border-b border-[#181923]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6 relative">
-                <div className="rounded-2xl overflow-hidden border border-[#232534] shadow-2xl">
-                  <img
-                    src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1000&q=80"
-                    alt="Espacio interior de Barbería Exclusiva"
-                    className="w-full h-[400px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 space-y-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4a366]">
-                  Tradición & Excelencia
-                </span>
-                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-zinc-100">
-                  Un santuario para el cuidado masculino
-                </h2>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Creamos un espacio donde el tiempo se detiene. Desde el primer café de bienvenida hasta el último toque de navaja, cada detalle está orquestado para que te sientas renovado, impecable y seguro de ti mismo.
+                <p className="text-zinc-400 text-sm max-w-xl mt-2 leading-relaxed">
+                  Cortes de autor, rituales tradicionales y los mejores profesionales en un solo lugar. Elige tu tratamiento preferido o al especialista de tu confianza.
                 </p>
-                <div className="pt-2">
+              </div>
+
+              {/* Selector de Pestañas / Filtro */}
+              <div className="flex items-center p-1.5 rounded-xl bg-[#14151e] border border-[#232535] shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('todos')}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeTab === 'todos'
+                      ? 'bg-[#c59b63] text-black shadow-md shadow-amber-950/30'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  Ver Todo
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('servicios')}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeTab === 'servicios'
+                      ? 'bg-[#c59b63] text-black shadow-md shadow-amber-950/30'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  Servicios ({featuredServices.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('barberos')}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeTab === 'barberos'
+                      ? 'bg-[#c59b63] text-black shadow-md shadow-amber-950/30'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  Barberos ({featuredBarbers.length})
+                </button>
+              </div>
+            </div>
+
+            {/* CONTENIDO DE SERVICIOS */}
+            {(activeTab === 'todos' || activeTab === 'servicios') && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between pb-2 border-b border-[#1c1d29]">
+                  <div className="flex items-center gap-2">
+                    <Scissors className="w-4 h-4 text-[#d4a366]" />
+                    <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-zinc-200">
+                      Servicios Principales
+                    </h3>
+                  </div>
                   <Link
-                    to="/nosotros"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#171823] hover:bg-[#202230] text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider border border-[#2b2d3e] transition-colors"
+                    to="/servicios"
+                    className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#d4a366] hover:text-[#e0b77e] transition-colors"
                   >
-                    <span>Conocer Nuestra Historia</span>
-                    <ArrowRight className="w-4 h-4 text-[#d4a366]" />
+                    <span>Ver catálogo completo</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ======================= BARBEROS DESTACADOS ======================= */}
-        <section className="py-20 bg-[#0b0c10] border-b border-[#181923]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d4a366]">
-                  Especialistas de la Casa
-                </span>
-                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-zinc-100 mt-1">
-                  Maestros de la Navaja
-                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {featuredServices.map((srv) => (
+                    <ServiceCard key={srv.id} service={srv} />
+                  ))}
+                </div>
               </div>
-              <Link
-                to="/barberos"
-                className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#d4a366] hover:text-[#e0b77e] transition-colors"
-              >
-                <span>Ver todos los barberos</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+            )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredBarbers.map((barber) => (
-                <BarberCard key={barber.id} barber={barber} />
-              ))}
-            </div>
+            {/* Divisor si se muestran ambos */}
+            {activeTab === 'todos' && (
+              <div className="border-t border-[#1c1d29] pt-4" />
+            )}
+
+            {/* CONTENIDO DE BARBEROS */}
+            {(activeTab === 'todos' || activeTab === 'barberos') && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between pb-2 border-b border-[#1c1d29]">
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 text-[#d4a366]" />
+                    <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-zinc-200">
+                      Nuestros Maestros Barberos
+                    </h3>
+                  </div>
+                  <Link
+                    to="/barberos"
+                    className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-[#d4a366] hover:text-[#e0b77e] transition-colors"
+                  >
+                    <span>Conocer a todo el equipo</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {featuredBarbers.map((barber) => (
+                    <BarberCard key={barber.id} barber={barber} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

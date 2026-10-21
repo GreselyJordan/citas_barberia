@@ -505,7 +505,7 @@ export default function BookingPage() {
                     <input
                       type="tel"
                       required
-                      placeholder="Ej. 300 123 4567"
+                      placeholder="Ej. 099 123 4567"
                       value={clientPhone}
                       onChange={(e) => setClientPhone(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#191a26] border border-[#2b2e40] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-[#c59b63] transition-colors"

@@ -1,10 +1,9 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import ScrollToTop from '../components/common/ScrollToTop';
 import HomePage from '../pages/public/HomePage';
 import BookingPage from '../pages/booking/BookingPage';
 import AboutPage from '../pages/public/AboutPage';
 import ServicesPage from '../pages/public/ServicesPage';
-import BarbersPage from '../pages/public/BarbersPage';
 import ContactPage from '../pages/public/ContactPage';
 
 export default function AppRoutes() {
@@ -14,9 +13,9 @@ export default function AppRoutes() {
       <Routes>
         {/* Rutas Públicas */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/nosotros" element={<AboutPage />} />
         <Route path="/servicios" element={<ServicesPage />} />
-        <Route path="/barberos" element={<BarbersPage />} />
+        <Route path="/barberos" element={<Navigate to="/servicios" replace />} />
+        <Route path="/nosotros" element={<AboutPage />} />
         <Route path="/contacto" element={<ContactPage />} />
 
         {/* Ruta de Agendamiento de Citas */}

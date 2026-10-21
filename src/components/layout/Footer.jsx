@@ -72,12 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/servicios" className="hover:text-[#d4a366] transition-colors">
-                  Servicios & Tarifas
-                </Link>
-              </li>
-              <li>
-                <Link to="/barberos" className="hover:text-[#d4a366] transition-colors">
-                  Equipo de Barberos
+                  Servicios & Barberos
                 </Link>
               </li>
               <li>
@@ -101,7 +96,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-[#d4a366] shrink-0 mt-0.5" />
-                <span>+57 (300) 123-4567</span>
+                <span>+593 99 123 4567</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-[#d4a366] shrink-0 mt-0.5" />
@@ -109,7 +104,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#d4a366] shrink-0 mt-0.5" />
-                <span>Cra. 15 # 85-32, Zona Rosa, Bogotá</span>
+                <span>Malecón Las Palmas, Esmeraldas - Ecuador</span>
               </li>
             </ul>
           </div>

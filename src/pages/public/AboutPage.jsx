@@ -124,7 +124,7 @@ export default function AboutPage() {
                     <span className="font-serif-luxury text-lg font-bold text-white block">
                       Espacio Diseñado para el Caballero Contemporáneo
                     </span>
-                    <span className="text-xs text-[#d4a366]">Sede Principal Zona Rosa</span>
+                    <span className="text-xs text-[#d4a366]">Sede Principal Las Palmas, Esmeraldas</span>
                   </div>
                 </div>
               </div>

@@ -57,7 +57,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <span className="text-zinc-400 block font-semibold">Dirección Principal</span>
-                        <p className="text-zinc-200 text-sm mt-0.5">Cra. 15 # 85-32, Zona Rosa, Bogotá</p>
+                        <p className="text-zinc-200 text-sm mt-0.5">Malecón Las Palmas, Esmeraldas - Ecuador</p>
                       </div>
                     </div>
 
@@ -67,7 +67,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <span className="text-zinc-400 block font-semibold">Teléfono / WhatsApp</span>
-                        <p className="text-zinc-200 text-sm mt-0.5">+57 (300) 123-4567</p>
+                        <p className="text-zinc-200 text-sm mt-0.5">+593 99 123 4567</p>
                       </div>
                     </div>
 
